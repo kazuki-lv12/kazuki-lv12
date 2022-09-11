@@ -29,13 +29,13 @@ const main = () => {
 
   // botが返すbody
   const body = {
-    username: `${process.env.USER_NAME}`,
-    avatar_url: `${process.env.USER_ICON}`,
+    username: process.env.USER_NAME,
+    avatar_url: process.env.USER_ICON,
     content: content
   }
 
   // webhookにリクエストを投げる
-  fetch(`${process.env.DISCORD_HOOK}`, {
+  fetch(process.env.DISCORD_HOOK, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
