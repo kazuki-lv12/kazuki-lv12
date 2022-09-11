@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  schedule:
+    - cron: 0 21 * * *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Execution
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+      - run: |
+          npm ci
+          export DISCORD_USER=${{ secrets.DISCORD_USER }} 
+          export DISCORD_HOOK=${{ secrets.DISCORD_HOOK }}
+          export USER_NAME=${{ secrets.USER_NAME }}
+          export USER_ICON=${{ secrets.USER_ICON }}
+          node index.mjs
+
+      - name: Github commit & merage
+        run: |
+          git config user.name ${NAME}
+          git config user.email ${EMAIL}
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${NAME}/${REPO}
+          git checkout main
+          git commit -am "auto update!!"
+          git push origin HEAD:${GITHUB_REF}
+        env:
+          NAME: kazuki-lv12
+          EMAIL: ${{ secrets.USER_EMAIL }}
+          REPO: kazuki-lv12
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
