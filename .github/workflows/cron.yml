@@ -23,7 +23,7 @@ jobs:
           export USER_ICON=${{ secrets.USER_ICON }}
           node index.mjs
 
-      - name: Github commit & merage
+      - name: Github commit & push
         run: |
           git config user.name ${NAME}
           git config user.email ${EMAIL}
