@@ -35,13 +35,13 @@ const main = () => {
   }
 
   // webhookにリクエストを投げる
-  fetch(process.env.DISCORD_HOOK, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  })
+  // fetch(process.env.DISCORD_HOOK, {
+  //   method: "POST",
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(body)
+  // })
 }
 
 main()
